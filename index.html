@@ -149,8 +149,8 @@ p {
   <body>
     <audio id="sound1" src="main.mp3" preload="auto"></audio>
 
-<button class="button heart-button" onclick="playAudioAndShowCard()">
-  <span class="heart-icon"></span>Play it
+<button class="button heart-button" onclick="toggleAudioAndShowCard()">
+  <span class="heart-icon"></span><span id="buttonLabel">Play it</span>
 </button>
 
 <div class="birthdayCard">
@@ -182,13 +182,19 @@ p {
 <script>
   function playAudioAndShowCard() {
  
-    var audio = document.getElementById("sound1");
-    
-    // Skip 5 seconds
-    audio.currentTime += 5;
-    
-    // Play the audio
-    audio.play();
+   var audio = document.getElementById("sound1");
+    var buttonLabel = document.getElementById("buttonLabel");
+
+    if (audio.paused) {
+      // Play the audio
+      audio.play();
+      buttonLabel.innerText = "Stop";
+    } else {
+      // Pause the audio
+      audio.pause();
+      audio.currentTime = 0; // Reset the audio to the beginning
+      buttonLabel.innerText = "Play it";
+    }
 
     // Show birthday card
     var birthdayCard = document.querySelector('.birthdayCard');
@@ -197,7 +203,6 @@ p {
     if (birthdayCard.style.display === 'none') {
       birthdayCard.style.display = 'none';
       cardshow.style.display = 'block';
-    
     } else {
       birthdayCard.style.display = 'block';
       cardshow.style.display = 'none';
