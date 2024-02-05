@@ -180,12 +180,12 @@ p {
 </div>
 
 <script>
-  function playAudioAndShowCard() {
- 
-   var audio = document.getElementById("sound1");
+   function toggleAudioAndShowCard() {
+    var audio = document.getElementById("sound1");
     var buttonLabel = document.getElementById("buttonLabel");
 
     if (audio.paused) {
+      audio.currentTime += 5;
       // Play the audio
       audio.play();
       buttonLabel.innerText = "Stop";
@@ -203,6 +203,30 @@ p {
     if (birthdayCard.style.display === 'none') {
       birthdayCard.style.display = 'none';
       cardshow.style.display = 'block';
+    } else {
+      birthdayCard.style.display = 'block';
+      cardshow.style.display = 'none';
+    }
+  }
+
+  function playAudioAndShowCard() {
+ 
+    var audio = document.getElementById("sound1");
+    
+    // Skip 5 seconds
+    audio.currentTime += 5;
+    
+    // Play the audio
+    audio.play();
+
+    // Show birthday card
+    var birthdayCard = document.querySelector('.birthdayCard');
+    var cardshow = document.querySelector('.cardshow');
+
+    if (birthdayCard.style.display === 'none') {
+      birthdayCard.style.display = 'none';
+      cardshow.style.display = 'block';
+    
     } else {
       birthdayCard.style.display = 'block';
       cardshow.style.display = 'none';
